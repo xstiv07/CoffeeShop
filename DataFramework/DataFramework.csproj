@@ -88,7 +88,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CoffeeShopDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config" />
     <None Include="CoffeeShopDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CoffeeShopDB.edmx</DependentUpon>
