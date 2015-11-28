@@ -26,6 +26,13 @@ namespace Restbucks
             xml.Indent = true;
 
             GlobalConfiguration.Configuration.Filters.Add(new ValidateModelStateAttribute());
+
+            HttpConfiguration config = GlobalConfiguration.Configuration;
+            config.Formatters.JsonFormatter.SerializerSettings.Formatting =
+                Newtonsoft.Json.Formatting.Indented;
+
+            config.Formatters.JsonFormatter.SerializerSettings.Converters.Add
+                (new Newtonsoft.Json.Converters.StringEnumConverter());
         }
     }
 
