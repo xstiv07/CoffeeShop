@@ -12,5 +12,18 @@ angular.module('app.services', [])
             return $http.get(baseUrl);
         };
 
+        itemFactory.one = function (id) {
+            return $http.get(baseUrl + "/" + id);
+        };
+
+        itemFactory.update = function (id, item) {
+            $http.defaults.headers.put["Content-Type"] = "application/xml";
+            return $http.put(baseUrl + "/" + id, item)
+        };
+
+        itemFactory.delete = function (id) {
+            return $http.delete(baseUrl + "/" + id);
+        };
+
         return itemFactory;
     })

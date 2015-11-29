@@ -1,45 +1,56 @@
 ﻿'use strict';
 
-// Google Analytics Collection APIs Reference:
-// https://developers.google.com/analytics/devguides/collection/analyticsjs/
+angular.module('app.controllers', ['ui.router'])
 
-angular.module('app.controllers', [])
-
-    // Path: /
-    .controller('HomeCtrl', ['$scope', '$location', '$window', 'Item', function ($scope, $location, $window, Item) {
-        $scope.$on('$viewContentLoaded', function () {
-            Item.all().success(function (data) {
-                console.log(data);
-                $scope.items = data;
-            })
+    // Path: /inventory
+    .controller('InventoryCtrl', ['$scope', '$rootScope', 'Item', function ($scope, $rootScope, Item) {
+        $rootScope.processing = true;
+        Item.all().success(function (data) {
+            $rootScope.items = data;
+            $rootScope.processing = false;
         });
     }])
 
-    // Path: /about
-    .controller('AboutCtrl', ['$scope', '$location', '$window', function ($scope, $location, $window) {
-        $scope.$root.title = 'AngularJS SPA | About';
-        $scope.$on('$viewContentLoaded', function () {
-            $window.ga('send', 'pageview', { 'page': $location.path(), 'title': $scope.$root.title });
-        });
-    }])
+    // Path: /inventory/{inventoryId}
+    .controller('InventoryDetailsCtrl', ['$scope', "$stateParams", "Item", "$rootScope", "$state", function ($scope, $stateParams, Item, $rootScope, $state) {
 
-    // Path: /login
-    .controller('LoginCtrl', ['$scope', '$location', '$window', function ($scope, $location, $window) {
-        $scope.$root.title = 'AngularJS SPA | Sign In';
-        // TODO: Authorize a user
-        $scope.login = function () {
-            $location.path('/');
-            return false;
+        $rootScope.processing = true;
+
+        $scope.milkValues = ["None", "Lowfat", "Whole"];
+        $scope.sizeValues = ["Small", "Medium", "Large"];
+
+        var itemId = $stateParams.inventoryId;
+
+        Item.one(itemId).success(function (data) {
+            $scope.item = data;
+            $rootScope.processing = false;
+        });
+
+        $scope.update = function (isValid) {
+            if (isValid) {
+                $rootScope.processing = true;
+
+                var itemNamespaceBegin = "<Item \r\n    xmlns:xsi=\"http:\/\/www.w3.org\/2001\/XMLSchema-instance\" \r\n    xmlns:xsd=\"http:\/\/www.w3.org\/2001\/XMLSchema\">\r\n";
+                var itemNamespaceEnd = "</Item>";
+
+                var x2js = new X2JS();
+
+                var itemXML = itemNamespaceBegin + x2js.json2xml_str($scope.item) + itemNamespaceEnd;
+
+                Item.update($scope.item.Id, itemXML).success(function (data) {
+                    $scope.item = data;
+                    $rootScope.processing = false;
+                });
+            };
         };
-        $scope.$on('$viewContentLoaded', function () {
-            $window.ga('send', 'pageview', { 'page': $location.path(), 'title': $scope.$root.title });
-        });
-    }])
 
-    // Path: /error/404
-    .controller('Error404Ctrl', ['$scope', '$location', '$window', function ($scope, $location, $window) {
-        $scope.$root.title = 'Error 404: Page Not Found';
-        $scope.$on('$viewContentLoaded', function () {
-            $window.ga('send', 'pageview', { 'page': $location.path(), 'title': $scope.$root.title });
-        });
-    }]);
+        $scope.deleteItem = function () {
+            $rootScope.processing = true;
+            Item.delete($scope.item.Id).success(function (data) {
+                if (data.isDeleted) {
+                    $state.go('inventory');
+                    $rootScope.processing = false;
+                };
+            });
+        };
+    }])

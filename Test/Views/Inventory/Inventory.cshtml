@@ -1,0 +1,44 @@
+﻿<div class="container">
+    <div class="row padding-medium align-right">
+        <span class="btn-link">Add New</span>
+    </div>
+    <div class="row" ng-if="items.length > 0">
+        <div class="col-sm-6 col-md-3" ng-repeat="item in items">
+            <div class="panel panel-default panel-card">
+                <div class="panel-heading">
+                    <img src="~/Images/Cappuccino.jpg" />
+                </div>
+                <div class="panel-body">
+                    <div>
+                        <label>Sort: </label>
+                        <small>{{item.Name}}</small>
+                    </div>
+                    <div>
+                        <label>Description: </label>
+                        <small>{{item.Description}}</small>
+                    </div>
+                    <div>
+                        <label>Milk: </label>
+                        <small>{{item.Milk}}</small>
+                    </div>
+                    <div>
+                        <label>Size: </label>
+                        <small>{{item.Size}}</small>
+                    </div>
+                    <div>
+                        <label class="red">Price: </label>
+                        <small>{{item.Price}}</small>
+                    </div>
+                </div>
+                <div class="panel-thumbnails">
+                    <div class="centered top-padding-sm">
+                        <a ui-sref="inventoryCustomize({inventoryId: item.Id })" class="btn btn-primary btn-sm" role="button">Customize</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="items.length == 0">
+            <h4>Currently, there are no items in stock.</h4>
+        </div>
+    </div>
+</div>

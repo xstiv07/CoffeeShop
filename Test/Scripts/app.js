@@ -1,38 +1,26 @@
 ﻿'use strict';
 
 // Declares how the application should be bootstrapped. See: http://docs.angularjs.org/guide/module
-angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directives', 'app.controllers'])
+angular.module('app', ['ui.router', 'app.services', 'app.controllers'])
 
     // Gets executed during the provider registrations and configuration phase. Only providers and constants can be
     // injected here. This is to prevent accidental instantiation of services before they have been fully configured.
-    .config(['$stateProvider', '$locationProvider', '$httpProvider', function ($stateProvider, $locationProvider, $httpProvider) {
-
-        // UI States, URL Routing & Mapping. For more info see: https://github.com/angular-ui/ui-router
-        // ------------------------------------------------------------------------------------------------------------
+    .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider,$urlRouterProvider, $locationProvider) {
 
         $stateProvider
-            .state('home', {
-                url: '/',
-                templateUrl: '/views/index',
-                controller: 'HomeCtrl'
+            .state('inventory', {
+                url: '/inventory',
+                templateUrl: '/views/inventory/inventory',
+                controller: 'InventoryCtrl'
 
             })
-            .state('about', {
-                url: '/about',
-                templateUrl: '/views/about',
-                controller: 'AboutCtrl'
+            .state('inventoryCustomize', {
+                url: "/inventory/:inventoryId",
+                templateUrl: '/views/inventory/inventorydetails',
+                controller: "InventoryDetailsCtrl"
             })
-            .state('login', {
-                url: '/login',
-                layout: 'basic',
-                templateUrl: '/views/login',
-                controller: 'LoginCtrl'
-            })
-            .state('otherwise', {
-                url: '*path',
-                templateUrl: '/views/404',
-                controller: 'Error404Ctrl'
-            });
+
+        $urlRouterProvider.otherwise('/inventory');
 
         $locationProvider.html5Mode(true);
 

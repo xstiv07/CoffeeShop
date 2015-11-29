@@ -1,3 +1,163 @@
 ﻿.table-striped{
     width: 100%;
 }
+nav.navbar-findcond { background: #fff; border-color: #ccc; box-shadow: 0 0 2px 0 #ccc; }
+nav.navbar-findcond a { color: #f14444; }
+nav.navbar-findcond ul.navbar-nav a { color: #f14444; border-style: solid; border-width: 0 0 2px 0; border-color: #fff; }
+nav.navbar-findcond ul.navbar-nav a:hover,
+nav.navbar-findcond ul.navbar-nav a:visited,
+nav.navbar-findcond ul.navbar-nav a:focus,
+nav.navbar-findcond ul.navbar-nav a:active { background: #fff; }
+nav.navbar-findcond ul.navbar-nav a:hover { border-color: #f14444; }
+nav.navbar-findcond li.divider { background: #ccc; }
+nav.navbar-findcond button.navbar-toggle { background: #f14444; border-radius: 2px; }
+nav.navbar-findcond button.navbar-toggle:hover { background: #999; }
+nav.navbar-findcond button.navbar-toggle > span.icon-bar { background: #fff; }
+nav.navbar-findcond ul.dropdown-menu { border: 0; background: #fff; border-radius: 4px; margin: 4px 0; box-shadow: 0 0 4px 0 #ccc; }
+nav.navbar-findcond ul.dropdown-menu > li > a { color: #444; }
+nav.navbar-findcond ul.dropdown-menu > li > a:hover { background: #f14444; color: #fff; }
+nav.navbar-findcond span.badge { background: #f14444; font-weight: normal; font-size: 11px; margin: 0 4px; }
+nav.navbar-findcond span.badge.new { background: rgba(255, 0, 0, 0.8); color: #fff; }
+
+.timer-loader{
+    z-index: 9999999;
+    right: 49%;
+    top: 40%;
+    position: absolute !important;
+}
+
+.centered{
+    text-align: center;
+}
+
+.top-padding-sm{
+    padding-top: 20px;
+}
+
+
+.padding-medium{
+    padding: 15px;
+}
+
+.align-right{
+    text-align: right
+}
+
+label{
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+.panel-body{
+    padding: 5px 0px 0px 10px !important;
+}
+
+.red{
+    color: #f14444;
+}
+
+/*
+Code snippet by maridlcrmn for Bootsnipp.com
+Follow me on Twitter @maridlcrmn
+Image credits: unsplash.com, uifaces.com/authorized
+Image placeholders: placemi.com
+*/
+
+
+#t-cards {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    background-color: #345;    
+}
+
+/********************************/
+/*          Panel cards         */
+/********************************/
+.panel.panel-card {
+    position: relative;
+    height: 270px;
+    border: none;
+    overflow: hidden;
+}
+.panel.panel-card .panel-heading {
+    position: relative;
+    z-index: 2;
+    height: 165px;
+    border-color: #fff;
+    overflow: hidden;
+    
+    -webkit-transition: height 600ms ease-in-out;
+            transition: height 600ms ease-in-out;
+}
+.panel.panel-card .panel-heading img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    width: 120%;
+    
+    -webkit-transform: translate3d(-50%,-50%,0);
+            transform: translate3d(-50%,-50%,0);
+}
+.panel.panel-card .panel-heading button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    z-index: 3;
+}
+.panel.panel-card .panel-figure {
+    position: absolute;
+    top: auto;
+    left: 50%;
+    z-index: 3;
+    width: 70px;
+    height: 70px;
+    background-color: #fff;
+    border-radius: 50%;
+    opacity: 1;
+    -webkit-box-shadow: 0 0 0 3px #fff;
+            box-shadow: 0 0 0 3px #fff;
+    
+    -webkit-transform: translate3d(-50%,-50%,0);
+            transform: translate3d(-50%,-50%,0);
+    
+    -webkit-transition: opacity 400ms ease-in-out;
+            transition: opacity 400ms ease-in-out;
+}
+
+.panel.panel-card .panel-body {
+    padding-top: 20px;
+
+    -webkit-transition: padding 400ms ease-in-out;
+            transition: padding 400ms ease-in-out;
+} 
+
+.panel.panel-card .panel-thumbnails {
+    padding: 0 15px 20px;
+}
+.panel-thumbnails .thumbnail {
+    width: 60px;
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+} 
+
+
+.panel.panel-card:hover .panel-heading {
+    height: 55px;
+    
+    -webkit-transition: height 400ms ease-in-out;
+            transition: height 400ms ease-in-out;
+}
+.panel.panel-card:hover .panel-figure {
+    opacity: 0;
+    
+    -webkit-transition: opacity 400ms ease-in-out;
+            transition: opacity 400ms ease-in-out;
+}
+.panel.panel-card:hover .panel-body {
+    padding-top: 20px;
+    
+    -webkit-transition: padding 400ms ease-in-out;
+            transition: padding 400ms ease-in-out;
+}

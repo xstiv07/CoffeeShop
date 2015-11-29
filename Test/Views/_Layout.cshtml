@@ -8,41 +8,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     @Styles.Render("~/content/css/app")
 </head>
-<body>
+<body ng-cloak>
     <!--[if lt IE 9]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <header class="navbar navbar-inverse" role="banner" ng-if=" !layout ">@* The 'layout' property is set inside the app.run(..) method on '$stateChangeSuccess' *@
-        <div class="container">
-            <div class="navbar-header">
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".spa-navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="./" class="navbar-brand">AngularJS SPA Template</a>
+    <header>
+        <nav class="navbar navbar-findcond">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" ui-sref="inventory">Coffee Shop CS 404</a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active">
+                            <a href="#" class="dropdown-toggle"><i class="fa fa-fw fa-bell-o"></i> Inventory <span class="badge">{{items.length}}</span></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Orders <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Pending</a></li>
+                                <li><a href="#">Completed</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <nav class="collapse navbar-collapse spa-navbar-collapse" role="navigation">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="./about">About</a>
-                    </li>
-                    <li>
-                        <a href="./contacts">Contacts</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="./login">Sign In</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+        </nav>
     </header>
+    <div class="timer-loader" ng-if="processing">
+        Loading…
+    </div>
 
-    <div id="ui-view" class="container" ui-view data-tmpl-url="@Request.RequestContext.RouteData.DataTokens["templateUrl"]">
+    <div id="ui-view" ui-view data-tmpl-url="@Request.RequestContext.RouteData.DataTokens["templateUrl"]">
         @RenderBody()
     </div>
 
@@ -58,10 +62,12 @@
         https://developers.google.com/analytics/devguides/collection/analyticsjs/
     *@
     <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
         ga('create', '@WebConfigurationManager.AppSettings["GoogleAnalytics:PropertyID"]', '@(Request.IsLocal ? "none" : "auto")');
     </script>
 </body>

@@ -23,7 +23,8 @@ namespace Restbucks
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             var xml = GlobalConfiguration.Configuration.Formatters.XmlFormatter;
-            xml.Indent = true;
+
+            xml.UseXmlSerializer = true;
 
             GlobalConfiguration.Configuration.Filters.Add(new ValidateModelStateAttribute());
 

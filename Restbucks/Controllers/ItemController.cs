@@ -63,7 +63,7 @@ namespace Restbucks.Controllers
             return createdItem;
         }
 
-        public Item Put(int id, [FromBody]XElement itemXML)
+        public Item Put(int id, XElement itemXML)
         {
             var itemToChange = db.Items.Where(x => x.Id == id).FirstOrDefault();
 

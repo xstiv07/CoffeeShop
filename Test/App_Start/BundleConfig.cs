@@ -17,18 +17,19 @@ namespace App.Test
             bundles.Add(new StyleBundle("~/content/css/app").Include(
                 "~/content/app.css",
                 "~/content/bootstrap.min.css",
-                "~/content/Site.css"
+                "~/content/Site.css",
+                "~/content/timer.css"
                 ));
 
             bundles.Add(new ScriptBundle("~/js/jquery").Include("~/scripts/vendor/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/js/app").Include(
+                "~/scripts/app.js",
                 "~/scripts/vendor/angular-ui-router.js",
-                "~/scripts/filters.js",
                 "~/scripts/services.js",
-                "~/scripts/directives.js",
                 "~/scripts/controllers.js",
-                "~/scripts/app.js"));
+                "~/Scripts/bootstrap.min.js"
+                ));
         }
     }
 }

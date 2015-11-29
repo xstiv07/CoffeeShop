@@ -11,6 +11,6 @@ namespace DataFramework.MetaData
 {
     public class ItemMetaData
     {
-        
+        public string Name;   
     }
 }
