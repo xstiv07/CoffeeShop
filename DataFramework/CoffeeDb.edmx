@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CoffeeShopDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CoffeeDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Item">
           <Key>
             <PropertyRef Name="Id" />
@@ -13,9 +13,11 @@
           <Property Name="UniqueId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="varchar(max)" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="ImageURL" Type="varchar(max)" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="4" Nullable="false" />
-          <Property Name="Milk" Type="int" />
+          <Property Name="Milk" Type="int" Nullable="false" />
           <Property Name="Size" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Line">
@@ -24,7 +26,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OrderUniqueId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ItemId" Type="int" />
+          <Property Name="ItemId" Type="int" Nullable="false" />
           <Property Name="LineQty" Type="int" Nullable="false" />
           <Property Name="LinePrice" Type="decimal" Precision="18" Scale="4" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
@@ -35,13 +37,15 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UniqueId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CustomerFirstName" Type="varchar(max)" Nullable="false" />
+          <Property Name="CustomerLastName" Type="varchar(max)" Nullable="false" />
           <Property Name="Location" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="Total" Type="decimal" Precision="18" Scale="4" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK__Line__ItemId__182C9B23">
-          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
           <End Role="Line" Type="Self.Line" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Item">
@@ -52,7 +56,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CoffeeShopDBModelStoreContainer">
+        <EntityContainer Name="CoffeeDbModelStoreContainer">
           <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Line" EntityType="Self.Line" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
@@ -65,7 +69,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="CoffeeShopDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="CoffeeDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Item">
           <Key>
             <PropertyRef Name="Id" />
@@ -74,9 +78,11 @@
           <Property Name="UniqueId" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
-          <Property Name="Milk" Type="CoffeeShopDBModel.Milk" Nullable="false" />
-          <Property Name="Size" Type="CoffeeShopDBModel.Size" Nullable="false" />
+          <Property Name="Milk" Type="CoffeeDbModel.Milk" Nullable="false" />
+          <Property Name="Size" Type="CoffeeDbModel.Size" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Lines" Relationship="Self.FK__Line__ItemId__182C9B23" FromRole="Item" ToRole="Line" />
         </EntityType>
@@ -86,7 +92,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OrderUniqueId" Type="Guid" Nullable="false" />
-          <Property Name="ItemId" Type="Int32" />
+          <Property Name="ItemId" Type="Int32" Nullable="false" />
           <Property Name="LineQty" Type="Int32" Nullable="false" />
           <Property Name="LinePrice" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
@@ -98,13 +104,15 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UniqueId" Type="Guid" Nullable="false" />
-          <Property Name="Location" Type="CoffeeShopDBModel.OrderLocation" Nullable="false" />
-          <Property Name="Status" Type="CoffeeShopDBModel.OrderStatus" Nullable="false" />
+          <Property Name="CustomerFirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerLastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Location" Type="CoffeeDbModel.OrderLocation" Nullable="false" />
+          <Property Name="Status" Type="CoffeeDbModel.OrderStatus" Nullable="false" />
           <Property Name="Total" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK__Line__ItemId__182C9B23">
-          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
           <End Role="Line" Type="Self.Line" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Item">
@@ -115,7 +123,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CoffeeShopDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CoffeeDbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Items" EntityType="Self.Item" />
           <EntitySet Name="Lines" EntityType="Self.Line" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
@@ -133,23 +141,25 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CoffeeShopDBModelStoreContainer" CdmEntityContainer="CoffeeShopDBEntities">
+        <EntityContainerMapping StorageEntityContainer="CoffeeDbModelStoreContainer" CdmEntityContainer="CoffeeDbEntities">
           <EntitySetMapping Name="Items">
-            <EntityTypeMapping TypeName="CoffeeShopDBModel.Item">
+            <EntityTypeMapping TypeName="CoffeeDbModel.Item">
               <MappingFragment StoreEntitySet="Item">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UniqueId" ColumnName="UniqueId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Milk" ColumnName="Milk" />
                 <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Lines">
-            <EntityTypeMapping TypeName="CoffeeShopDBModel.Line">
+            <EntityTypeMapping TypeName="CoffeeDbModel.Line">
               <MappingFragment StoreEntitySet="Line">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="OrderUniqueId" ColumnName="OrderUniqueId" />
@@ -161,10 +171,12 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="CoffeeShopDBModel.Order">
+            <EntityTypeMapping TypeName="CoffeeDbModel.Order">
               <MappingFragment StoreEntitySet="Order">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UniqueId" ColumnName="UniqueId" />
+                <ScalarProperty Name="CustomerFirstName" ColumnName="CustomerFirstName" />
+                <ScalarProperty Name="CustomerLastName" ColumnName="CustomerLastName" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Total" ColumnName="Total" />

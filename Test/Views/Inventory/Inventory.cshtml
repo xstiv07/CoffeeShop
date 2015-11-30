@@ -1,12 +1,12 @@
 ﻿<div class="container">
     <div class="row padding-medium align-right">
-        <span class="btn-link">Add New</span>
+        <a ui-sref="inventoryAdd" class="btn-link">Add New</a>
     </div>
-    <div class="row" ng-if="items.length > 0">
-        <div class="col-sm-6 col-md-3" ng-repeat="item in items">
+    <div class="row">
+        <div class="col-sm-6 col-md-3" ng-repeat="item in items" ng-if="items.length > 0">
             <div class="panel panel-default panel-card">
                 <div class="panel-heading">
-                    <img src="~/Images/Cappuccino.jpg" />
+                    <img ng-src="https://s3-us-west-2.amazonaws.com/cs-404-coffee/{{item.ImageURL}}" alt="coffee" />
                 </div>
                 <div class="panel-body">
                     <div>
@@ -24,6 +24,10 @@
                     <div>
                         <label>Size: </label>
                         <small>{{item.Size}}</small>
+                    </div>
+                    <div>
+                        <label>Quantity: </label>
+                        <small>{{item.Quantity}}</small>
                     </div>
                     <div>
                         <label class="red">Price: </label>

@@ -16,6 +16,8 @@ namespace DataFramework
     {
         public int Id { get; set; }
         public System.Guid UniqueId { get; set; }
+        public string CustomerFirstName { get; set; }
+        public string CustomerLastName { get; set; }
         public DataFramework.Helpers.OrderLocation Location { get; set; }
         public DataFramework.Helpers.OrderStatus Status { get; set; }
         public decimal Total { get; set; }

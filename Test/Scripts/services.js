@@ -25,5 +25,10 @@ angular.module('app.services', [])
             return $http.delete(baseUrl + "/" + id);
         };
 
+        itemFactory.create = function (item) {
+            $http.defaults.headers.post["Content-Type"] = "application/xml";
+            return $http.post(baseUrl, item);
+        };
+
         return itemFactory;
     })

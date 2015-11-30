@@ -28,7 +28,7 @@
                 <div class="collapse navbar-collapse" id="navbar">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active">
-                            <a href="#" class="dropdown-toggle"><i class="fa fa-fw fa-bell-o"></i> Inventory <span class="badge">{{items.length}}</span></a>
+                            <a ui-sref="inventory" class="dropdown-toggle"><i class="fa fa-fw fa-bell-o"></i> Inventory <span class="badge">{{items.length}}</span></a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Orders <span class="caret"></span></a>
@@ -52,15 +52,11 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.min.js"></script>
+    <script src="~/Scripts/ng-file-upload-shim.min.js"></script>
+    <script src="~/Scripts/ng-file-upload.min.js"></script>
     @Scripts.Render("~/js/app")
-    @*
-        Google Analytics
-        ----------------
-        Google recommends that this script be placed at the top of the page. Factors to consider: if you place this
-        script at the top of the page, you'll be able to count users who don't fully load the page, and you'll incur
-        the max number of simultaneous connections of the browser.
-        https://developers.google.com/analytics/devguides/collection/analyticsjs/
-    *@
+    
+
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {

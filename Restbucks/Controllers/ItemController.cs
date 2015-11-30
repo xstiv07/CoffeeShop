@@ -37,30 +37,51 @@ namespace Restbucks.Controllers
         }
 
 
-        public Item Post([FromBody]XElement itemXML)
+        public Item Post(XElement itemXML)
         {
-            Milk milk;
-            Size size;
-
-            Enum.TryParse(itemXML.Element("Milk").Value, out milk);
-            Enum.TryParse(itemXML.Element("Size").Value, out size);
-
-            var item = new Item()
+            try
             {
-                UniqueId = Guid.NewGuid(),
-                Name = itemXML.Element("Name").Value,
-                Description = itemXML.Element("Description").Value,
-                Price = Decimal.Parse(itemXML.Element("Price").Value),
-                Milk = milk,
-                Size = size
-            };
+                Milk milk;
+                Size size;
 
-            db.Items.Add(item);
-            db.SaveChanges();
+                if (itemXML.Element("Milk") != null)
+                {
+                    Enum.TryParse(itemXML.Element("Milk").Value, out milk);
+                }
+                else
+                {
+                    milk = Milk.undefined;
+                }
 
-            var createdItem = db.Items.Where(x => x.UniqueId == item.UniqueId).FirstOrDefault();
+                Enum.TryParse(itemXML.Element("Size").Value, out size);
 
-            return createdItem;
+                var item = new Item()
+                {
+                    UniqueId = Guid.NewGuid(),
+                    Name = itemXML.Element("Name").Value,
+                    Description = itemXML.Element("Description").Value,
+                    Price = Decimal.Parse(itemXML.Element("Price").Value),
+                    Quantity = Int32.Parse(itemXML.Element("Quantity").Value),
+                    ImageURL = itemXML.Element("ImageURL").Value,
+                    Milk = milk,
+                    Size = size
+                };
+
+                db.Items.Add(item);
+                db.SaveChanges();
+
+                var createdItem = db.Items.Where(x => x.UniqueId == item.UniqueId).FirstOrDefault();
+
+                return createdItem;
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                {
+                    Content = new StringContent(ex.InnerException.ToString()),
+                    ReasonPhrase = "Critical Exception"
+                });
+            }
         }
 
         public Item Put(int id, XElement itemXML)
@@ -69,22 +90,41 @@ namespace Restbucks.Controllers
 
             if (itemToChange != null)
             {
+                try
+                {
+                    Milk milk;
+                    Size size;
 
-                Milk milk;
-                Size size;
+                    if (itemXML.Element("Milk") != null)
+                    {
+                        Enum.TryParse(itemXML.Element("Milk").Value, out milk);
+                    }
+                    else
+                    {
+                        milk = Milk.undefined;
+                    }
+                    Enum.TryParse(itemXML.Element("Size").Value, out size);
 
-                Enum.TryParse(itemXML.Element("Milk").Value, out milk);
-                Enum.TryParse(itemXML.Element("Size").Value, out size);
+                    itemToChange.Name = itemXML.Element("Name").Value;
+                    itemToChange.Description = itemXML.Element("Description").Value;
+                    itemToChange.Price = Decimal.Parse(itemXML.Element("Price").Value);
+                    itemToChange.Quantity = Int32.Parse(itemXML.Element("Quantity").Value);
+                    itemToChange.ImageURL = itemXML.Element("ImageURL").Value;
+                    itemToChange.Milk = milk;
+                    itemToChange.Size = size;
 
-                itemToChange.Name = itemXML.Element("Name").Value;
-                itemToChange.Description = itemXML.Element("Description").Value;
-                itemToChange.Price = Decimal.Parse(itemXML.Element("Price").Value);
-                itemToChange.Milk = milk;
-                itemToChange.Size = size;
+                    db.SaveChanges();
 
-                db.SaveChanges();
-
-                return itemToChange;
+                    return itemToChange;
+                }
+                catch (Exception ex)
+                {
+                    throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                    {
+                        Content = new StringContent(ex.InnerException.ToString()),
+                        ReasonPhrase = "Critical Exception"
+                    });
+                }
             }
             else
             {

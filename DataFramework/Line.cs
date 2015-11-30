@@ -16,7 +16,7 @@ namespace DataFramework
     {
         public int Id { get; set; }
         public System.Guid OrderUniqueId { get; set; }
-        public Nullable<int> ItemId { get; set; }
+        public int ItemId { get; set; }
         public int LineQty { get; set; }
         public decimal LinePrice { get; set; }
         public bool isDeleted { get; set; }

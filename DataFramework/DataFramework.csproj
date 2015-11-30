@@ -50,56 +50,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CoffeeShopDB.Context.cs">
+    <Compile Include="CoffeeDb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CoffeeShopDB.Context.tt</DependentUpon>
+      <DependentUpon>CoffeeDb.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="CoffeeShopDB.cs">
+    <Compile Include="CoffeeDb.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CoffeeShopDB.tt</DependentUpon>
+      <DependentUpon>CoffeeDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="CoffeeShopDB.Designer.cs">
+    <Compile Include="CoffeeDb.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CoffeeShopDB.edmx</DependentUpon>
+      <DependentUpon>CoffeeDb.edmx</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Milk.cs" />
     <Compile Include="Helpers\OrderLocation.cs" />
     <Compile Include="Helpers\OrderStatus.cs" />
     <Compile Include="Helpers\Size.cs" />
     <Compile Include="Item.cs">
-      <DependentUpon>CoffeeShopDB.tt</DependentUpon>
+      <DependentUpon>CoffeeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Line.cs">
-      <DependentUpon>CoffeeShopDB.tt</DependentUpon>
+      <DependentUpon>CoffeeDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="MetaData\ItemMetaData.cs" />
-    <Compile Include="MetaData\OrderMetaData.cs" />
-    <Compile Include="MetaData\PartialClasses.cs" />
     <Compile Include="Order.cs">
-      <DependentUpon>CoffeeShopDB.tt</DependentUpon>
+      <DependentUpon>CoffeeDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="CoffeeShopDB.edmx">
+    <EntityDeploy Include="CoffeeDb.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CoffeeShopDB.Designer.cs</LastGenOutput>
+      <LastGenOutput>CoffeeDb.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="CoffeeShopDB.Context.tt">
+    <None Include="CoffeeDb.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CoffeeShopDB.edmx</DependentUpon>
-      <LastGenOutput>CoffeeShopDB.Context.cs</LastGenOutput>
+      <DependentUpon>CoffeeDb.edmx</DependentUpon>
+      <LastGenOutput>CoffeeDb.Context.cs</LastGenOutput>
     </None>
-    <None Include="CoffeeShopDB.edmx.diagram">
-      <DependentUpon>CoffeeShopDB.edmx</DependentUpon>
+    <None Include="CoffeeDb.edmx.diagram">
+      <DependentUpon>CoffeeDb.edmx</DependentUpon>
     </None>
-    <None Include="CoffeeShopDB.tt">
+    <None Include="CoffeeDb.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CoffeeShopDB.edmx</DependentUpon>
-      <LastGenOutput>CoffeeShopDB.cs</LastGenOutput>
+      <DependentUpon>CoffeeDb.edmx</DependentUpon>
+      <LastGenOutput>CoffeeDb.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

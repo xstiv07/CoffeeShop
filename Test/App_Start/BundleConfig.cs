@@ -28,6 +28,8 @@ namespace App.Test
                 "~/scripts/vendor/angular-ui-router.js",
                 "~/scripts/services.js",
                 "~/scripts/controllers.js",
+                "~/scripts/directives.js",
+                "~/Scripts/config.js",
                 "~/Scripts/bootstrap.min.js"
                 ));
         }

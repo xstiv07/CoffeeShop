@@ -11,11 +11,11 @@ namespace Restbucks
 {
     public class BaseController : ApiController
     {
-        protected CoffeeShopDBEntities db;
+        protected CoffeeDbEntities db;
 
         public BaseController()
         {
-            db = new CoffeeShopDBEntities();
+            db = new CoffeeDbEntities();
         }
     }
 }

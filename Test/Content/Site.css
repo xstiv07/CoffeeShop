@@ -50,6 +50,23 @@ label{
 
 .panel-body{
     padding: 5px 0px 0px 10px !important;
+    text-align: right;
+}
+
+input.ng-invalid.ng-dirty, input.ng-submitted{
+  border-color: red;
+}
+
+
+form[novalidate].ng-submitted input.ng-invalid{
+  border-color: red;
+}
+
+.bottom-0{
+    bottom: 0;
+    position: absolute;
+    width: 80%;
+    text-align: center;
 }
 
 .red{

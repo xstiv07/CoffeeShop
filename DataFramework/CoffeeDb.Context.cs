@@ -13,10 +13,10 @@ namespace DataFramework
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CoffeeShopDBEntities : DbContext
+    public partial class CoffeeDbEntities : DbContext
     {
-        public CoffeeShopDBEntities()
-            : base("name=CoffeeShopDBEntities")
+        public CoffeeDbEntities()
+            : base("name=CoffeeDbEntities")
         {
         }
     

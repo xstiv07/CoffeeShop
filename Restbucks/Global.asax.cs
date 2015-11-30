@@ -1,5 +1,4 @@
-﻿using Restbucks.Filters;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -25,8 +24,6 @@ namespace Restbucks
             var xml = GlobalConfiguration.Configuration.Formatters.XmlFormatter;
 
             xml.UseXmlSerializer = true;
-
-            GlobalConfiguration.Configuration.Filters.Add(new ValidateModelStateAttribute());
 
             HttpConfiguration config = GlobalConfiguration.Configuration;
             config.Formatters.JsonFormatter.SerializerSettings.Formatting =

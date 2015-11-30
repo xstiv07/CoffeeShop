@@ -133,8 +133,8 @@
   <ItemGroup>
     <Compile Include="BaseController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\OptionsController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
-    <Compile Include="Filters\ValidateModelStateAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -155,9 +155,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
