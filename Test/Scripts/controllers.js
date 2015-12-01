@@ -11,10 +11,10 @@ angular.module('app.controllers', [])
         });
     }])
 
-    .controller("InventoryAddCtrl", ["$scope", "$rootScope", "Item", "$state", 'Upload', "S3", "$timeout", function ($scope, $rootScope, Item, $state, Upload, S3, $timeout) {
+    .controller("InventoryAddCtrl", ["$scope", "$rootScope", "Item", "$state", 'Upload', "S3", "apiConfig", "$timeout", function ($scope, $rootScope, Item, $state, Upload, S3, apiConfig, $timeout) {
 
-        $scope.milkValues = ["Lowfat", "Whole"];
-        $scope.sizeValues = ["Small", "Medium", "Large"];
+        $scope.milkValues = apiConfig.milkEnum;
+        $scope.sizeValues = apiConfig.sizeEnum;
 
         $scope.item = {};
 
@@ -71,12 +71,12 @@ angular.module('app.controllers', [])
     }])
 
     // Path: /inventory/{inventoryId}
-    .controller('InventoryDetailsCtrl', ['$scope', "$stateParams", "Item", "$rootScope", "$state", function ($scope, $stateParams, Item, $rootScope, $state) {
+    .controller('InventoryDetailsCtrl', ['$scope', "$stateParams", "Item", "$rootScope", "$state", "apiConfig", function ($scope, $stateParams, Item, $rootScope, $state, apiConfig) {
 
         $rootScope.processing = true;
 
-        $scope.milkValues = ["Lowfat", "Whole"];
-        $scope.sizeValues = ["Small", "Medium", "Large"];
+        $scope.milkValues = apiConfig.milkEnum;
+        $scope.sizeValues = apiConfig.sizeEnum;
 
         var itemId = $stateParams.inventoryId;
 
@@ -106,5 +106,47 @@ angular.module('app.controllers', [])
                     $rootScope.processing = false;
                 };
             });
+        };
+    }])
+
+    .controller("OrderCtrl", ["$scope", "$rootScope", "Order", function ($scope, $rootScope, Order) {
+        $rootScope.processing = true;
+        Order.all().success(function (data) {
+            $rootScope.orders = data;
+            $rootScope.processing = false;
+        });
+    }])
+
+    .controller("OrderAddCtrl", ["$scope", "$rootScope", "Order", "apiConfig", "Item", function ($scope, $rootScope, Order, apiConfig, Item) {
+        $scope.orderLocation = apiConfig.orderLocation;
+        $scope.orderStatus = apiConfig.orderStatus;
+
+        var templateObj = { name: 'orderItems.html', url: 'orderItems.html' };
+
+        if ($rootScope.items != null) {
+            $scope.items = $rootScope.items;
+            console.log($scope.items);
+        } else {
+            $rootScope.processing = true;
+            Item.all().success(function (data) {
+                $rootScope.items = data;
+                $scope.items = data;
+                $rootScope.processing = false;
+            });
+        };
+
+        $scope.templates = [templateObj];
+        $scope.orderItems = [];
+        $scope.orderItem = {};
+
+        //$scope.deleteOrderItem = function (id) {
+        //    console.log(id)
+        //    $scope.orderItems.splice(id, 1);
+        //    $scope.templates.splice(id, 1);
+        //};
+
+        $scope.addOrderItem = function () {
+            $scope.orderItems.push($scope.orderItem);
+            $scope.templates.push(templateObj);
         };
     }])

@@ -133,7 +133,6 @@
   <ItemGroup>
     <Compile Include="BaseController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
-    <Compile Include="Controllers\OptionsController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

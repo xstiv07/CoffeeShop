@@ -16,8 +16,6 @@ coffeeShop.helpers = {
 
 angular.module('app', ['ui.router', 'app.services', 'app.controllers', 'app.directives', 'ngFileUpload', "customConfiguration"])
 
-    // Gets executed during the provider registrations and configuration phase. Only providers and constants can be
-    // injected here. This is to prevent accidental instantiation of services before they have been fully configured.
     .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
 
         $httpProvider.defaults.useXDomain = true;
@@ -40,6 +38,16 @@ angular.module('app', ['ui.router', 'app.services', 'app.controllers', 'app.dire
                 templateUrl: '/views/inventory/inventoryadd',
                 controller: "InventoryAddCtrl"
             })
+            .state("orders", {
+                url: "/orders",
+                templateUrl: "/views/orders/all",
+                controller: "OrderCtrl"
+            })
+            .state("newOrder", {
+                url: "/neworder",
+                templateUrl: '/views/orders/neworder',
+                controller: "OrderAddCtrl"
+            })
 
         $urlRouterProvider.otherwise('/inventory');
 
@@ -47,12 +55,9 @@ angular.module('app', ['ui.router', 'app.services', 'app.controllers', 'app.dire
 
     }])
 
-    // Gets executed after the injector is created and are used to kickstart the application. Only instances and constants
-    // can be injected here. This is to prevent further system configuration during application run time.
+
     .run(['$templateCache', '$rootScope', '$state', '$stateParams', function ($templateCache, $rootScope, $state, $stateParams) {
 
-        // <ui-view> contains a pre-rendered template for the current view
-        // caching it will prevent a round-trip to a server at the first page load
         var view = angular.element('#ui-view');
         $templateCache.put(view.data('tmpl-url'), view.html());
 

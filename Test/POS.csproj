@@ -143,7 +143,6 @@
     <Content Include="Content\variables.less" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Images\Cappuccino.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\config.js" />
@@ -512,6 +511,8 @@
     <Content Include="Views\_PageStart.cshtml" />
     <Content Include="Views\Inventory\InventoryDetails.cshtml" />
     <Content Include="Views\Inventory\InventoryAdd.cshtml" />
+    <Content Include="Views\Orders\all.cshtml" />
+    <Content Include="Views\Orders\newOrder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -531,9 +532,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Uploads\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>

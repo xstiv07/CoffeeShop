@@ -51,6 +51,8 @@ namespace Restbucks.Controllers
             var order = new Order()
             {
                 UniqueId = Guid.NewGuid(),
+                CustomerFirstName = orderXML.Element("CustomerFirstName").Value,
+                CustomerLastName = orderXML.Element("CustomerLastName").Value,
                 Location = loc,
                 Status = stat,
                 Total = 0

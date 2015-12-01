@@ -1,12 +1,10 @@
 ﻿'use strict';
 
-// Demonstrate how to register services
-// In this case it is a simple value service.
 angular.module('app.services', [])
 
-    .factory("Item", function ($http) {
+    .factory("Item", function ($http, apiConfig) {
         var itemFactory = {};
-        var baseUrl = "http://localhost:2873/api/item"
+        var baseUrl = apiConfig.baseUrl + "/item";
 
         itemFactory.all = function () {
             return $http.get(baseUrl);
@@ -31,4 +29,20 @@ angular.module('app.services', [])
         };
 
         return itemFactory;
+    })
+
+    .factory("Order", function ($http, apiConfig) {
+        var orderFactory = {};
+        var baseUrl = apiConfig.baseUrl + "/order";
+
+        orderFactory.all = function () {
+            return $http.get(baseUrl);
+        };
+
+        orderFactory.create = function (order) {
+            $http.defaults.headers.post["Content-Type"] = "application/xml";
+            return $http.post(baseUrl, order)
+        };
+
+        return orderFactory;
     })
