@@ -48,20 +48,23 @@
 <div class="container">
     <div class="row">
         <h3>Add new Item to Order:</h3>
-        <form name="itemsForm" ng-model="itemsForm" novalidate>
+        <form name="itemsForm" ng-model="itemsForm" novalidate ng-submit="addItemToOrder(itemsForm.$valid)">
             <div ng-repeat="templ in templates track by $index">
                 <div class="col-md-5" ng-if="!processing">
                     <div ng-include src="templ.url"></div>
 
                     <div class="btn-toolbar" ng-if="$index == templates.length - 1">
                         <a ng-click="backToOrders()" class="btn btn-primary btn-sm pull-right" role="button">Back to Orders</a>
-                        <a ng-click="addItemToOrder(item.Id)" class="btn btn-primary btn-sm pull-right" role="button">Add New Item</a>
-                        <label ng-model="order.Total" class="pull-left">Total: {{total | number}}</label>
+                        <button type="submit" class="btn btn-primary btn-sm pull-right" role="button">Add New Line</button>
                     </div>
                 </div>
             </div>
         </form>
 
+    </div>
+
+    <div class="alert alert-danger bottom-0 align-center" ng-show="displayError">
+        {{error}}
     </div>
 </div>
 

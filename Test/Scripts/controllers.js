@@ -160,7 +160,7 @@ angular.module('app.controllers', [])
         };
     }])
 
-    .controller("OrderDetailsCtrl", ["$scope", "$rootScope", "Order", "$state", "$stateParams", "Item", function ($scope, $rootScope, Order, $state, $stateParams, Item) {
+    .controller("OrderDetailsCtrl", ["$scope", "$rootScope", "Order", "$state", "$stateParams", "Item", "$timeout", function ($scope, $rootScope, Order, $state, $stateParams, Item, $timeout) {
         $rootScope.processing = true;
         var orderId = $stateParams.orderUniqueId;
 
@@ -183,13 +183,20 @@ angular.module('app.controllers', [])
             });
         };
 
-        $scope.addItemToOrder = function () {
-            $rootScope.processing = true;
+        $scope.addItemToOrder = function (isValid) {
 
-            Order.addItemToOrder($scope.newItem.item.Id, orderId, $scope.newItemQty.qty).success(function () {
-                $rootScope.processing = false;
-                window.location = "/order/" + orderId;
-            })
+            if (isValid) {
+                $rootScope.processing = true;
+
+                Order.addItemToOrder($scope.newItem.item.Id, orderId, $scope.newItemQty.qty).success(function () {
+                    $rootScope.processing = false;
+                    window.location = "/order/" + orderId;
+                })
+            } else {
+                $scope.error = 'Invalid Form';
+                $scope.displayError = true;
+                $timeout(function () { $scope.displayError = false }, 3000);
+            }
         };
 
         Order.getLines(orderId).success(function (data) {
