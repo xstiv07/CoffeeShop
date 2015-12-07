@@ -41,6 +41,7 @@
                 </div>
             </div>
         </div>
+        <pagination max-size="maxSize" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>
         <div ng-if="items.length == 0">
             <h4>Currently, there are no items in stock.</h4>
         </div>

@@ -47,6 +47,10 @@ nav.navbar-findcond span.badge.new { background: rgba(255, 0, 0, 0.8); color: #f
     text-align: right
 }
 
+.shortWidth{
+    max-width: 150px;
+}
+
 label{
     margin-bottom: 0;
     font-weight: 600;
@@ -172,6 +176,27 @@ Image placeholders: placemi.com
             transition: padding 400ms ease-in-out;
 } 
 
+/* 
+  Allow angular.js to be loaded in body, hiding cloaked elements until 
+  templates compile.  The !important is important given that there may be 
+  other selectors that are more specific or come later and might alter display.  
+ */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
+.zIndex{
+    z-index: 9999999999;
+}
+
+.orderNumber{
+    cursor: pointer;
+}
+
+body{
+    font-family: 'Lato', sans-serif;
+}
+
 .panel.panel-card .panel-thumbnails {
     padding: 0 15px 20px;
 }
@@ -182,6 +207,35 @@ Image placeholders: placemi.com
     background-color: #fff;
 } 
 
+.processed{
+    background-color: #2ECC71
+}
+
+.orderBlock{
+    margin-top: 10px;
+    padding: 10px;
+    border-right: thin solid #BFBFBF;
+}
+
+.fa-stack:hover{
+    color: #5cb85c!important;
+}
+
+.orderBlockNoBorder{
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.full-height{
+    height: 100vh;
+}
+
+.checkMark{
+    right: 12px;
+    top: 68px;
+    position: absolute;
+    color: #1BBC9B;
+}
 
 .panel.panel-card:hover .panel-heading {
     height: 55px;
@@ -227,6 +281,7 @@ Image placeholders: placemi.com
 }
 .hover-row .hover:hover {
   background: red;
+  cursor: pointer;
 }
 
 .hover-row .col-xs-3:nth-child(1):hover ~ .hover {

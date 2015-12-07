@@ -50,7 +50,7 @@ namespace Restbucks.Controllers
                 }
                 else
                 {
-                    milk = Milk.undefined;
+                    milk = Milk.None;
                 }
 
                 Enum.TryParse(itemXML.Element("Size").Value, out size);
@@ -101,7 +101,7 @@ namespace Restbucks.Controllers
                     }
                     else
                     {
-                        milk = Milk.undefined;
+                        milk = Milk.None;
                     }
                     Enum.TryParse(itemXML.Element("Size").Value, out size);
 

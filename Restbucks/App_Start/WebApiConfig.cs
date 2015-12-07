@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -10,8 +11,12 @@ namespace Restbucks
     {
         public static void Register(HttpConfiguration config)
         {
+
+            config.MapHttpAttributeRoutes();
+
+
             //enabling cors globally - no need to annotate each attribute
-            var corsAttr = new EnableCorsAttribute("http://localhost:8080", "*", "*");
+            var corsAttr = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(corsAttr);
 
             config.Routes.MapHttpRoute(
@@ -21,6 +26,8 @@ namespace Restbucks
             );
 
             config.Formatters.XmlFormatter.UseXmlSerializer = true;
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; 
+
         }
     }
 }

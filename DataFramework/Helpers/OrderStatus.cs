@@ -9,7 +9,6 @@ namespace DataFramework.Helpers
 {
     public enum OrderStatus
     {
-        undefined,
         [Display(Name = "Payment Expected")]
         PaymentExpected,
         [Display(Name = "Payment Accepted")]

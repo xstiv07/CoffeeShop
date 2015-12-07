@@ -21,6 +21,8 @@
     <IISExpressUseClassicPipelineMode />
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
     <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -152,6 +154,7 @@
     </Content>
     <Content Include="Scripts\directives.js" />
     <Content Include="Scripts\FileAPI.flash.swf" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\ng-file-upload-all.js" />
     <Content Include="Scripts\ng-file-upload-shim.min.js" />
     <Content Include="Scripts\ng-file-upload.min.js" />
@@ -494,7 +497,6 @@
     <Content Include="Scripts\vendor\jquery-2.0.3.min.map" />
     <None Include="Scripts\_references.js" />
     <Content Include="Scripts\app.js" />
-    <Content Include="apple-touch-icon-precomposed.png" />
     <Content Include="crossdomain.xml" />
     <Content Include="favicon.ico" />
     <Content Include="humans.txt" />
@@ -503,6 +505,9 @@
     </Content>
     <Content Include="robots.txt" />
     <Content Include="Scripts\xml2json.min.js" />
+    <Content Include="Views\Orders\newOrder.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -512,7 +517,8 @@
     <Content Include="Views\Inventory\InventoryDetails.cshtml" />
     <Content Include="Views\Inventory\InventoryAdd.cshtml" />
     <Content Include="Views\Orders\all.cshtml" />
-    <Content Include="Views\Orders\newOrder.cshtml" />
+    <Content Include="Views\Orders\details.cshtml" />
+    <Content Include="Views\Orders\customize.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -561,6 +567,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

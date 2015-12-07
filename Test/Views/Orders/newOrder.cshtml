@@ -1,6 +1,6 @@
-﻿<div class="container">
-    <div class="col-md-4 pull-left" ng-if="!processing">
-        <form class="form-horizontal" name="form" ng-submit="add(form.$valid)" ng-model="form" novalidate>
+﻿<div class="container" ng-cloak>
+    <div class="col-md-4 pull-left full-height" ng-if="!processing">
+        <form class="form-horizontal" name="form" ng-submit="addOrder(form.$valid)" ng-model="form" novalidate>
             <div class="form-group">
                 <label>Customer First Name</label>
                 <input required type="text" class="form-control" ng-model="order.CustomerFirstName">
@@ -13,44 +13,49 @@
 
             <div class="form-group">
                 <label>Location</label>
-                <select required class="form-control" name="location" ng-model="order.OrderLocation" ng-options="opt as opt for opt in orderLocation"></select>
+                <select required class="form-control" name="location" ng-model="order.Location" ng-options="opt for opt in orderLocation"></select>
             </div>
 
             <div class="form-group">
                 <label>Status</label>
-                <select required class="form-control" name="status" ng-model="order.OrderStatus" ng-options="opt as opt for opt in orderStatus"></select>
+                <select required class="form-control" name="status" ng-model="order.Status" ng-options="opt for opt in orderStatus"></select>
             </div>
 
             <div class="form-group pull-right">
                 <button type="submit" class="btn btn-primary">Create</button>
-                <a ui-sref="inventory" class="btn btn-primary">Cancel</a>
+                <a ui-sref="orders" class="btn btn-primary">Cancel</a>
             </div>
         </form>
     </div>
 
-    <div ng-repeat="templ in templates track by $index">
-        <div ng-include src="templ.url"></div>
-    </div>
+    <form name="itemsForm" ng-model="itemsForm" novalidate>
+        <div ng-repeat="templ in templates track by $index">
+            <div class="col-md-5 pull-right" ng-if="!processing">
+                <div ng-include src="templ.url" id="select_{{$index}}"></div>
 
-    @*<div class="alert alert-danger bottom-0 align-center" ng-show="displayError">
+                <div class="btn-toolbar" ng-if="$index == templates.length - 1">
+                    <button class="btn btn-danger pull-right" ng-show="orderItems.length > 1" ng-click="deleteOrderItem($index)">Delete</button>
+                    <button class="btn btn-primary pull-right" ng-click="addOrderItem($index, itemsForm.$valid)">Add</button>
+                    <label ng-model="order.Total" class="pull-left">Total: {{total | number}}</label>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <div class="alert alert-danger bottom-0 align-center" ng-show="displayError">
         {{error}}
-    </div>*@
+    </div>
 </div>
 
 <script src="~/Scripts/xml2json.min.js" type="text/javascript"></script>
 
 <script type="text/ng-template" id="orderItems.html">
-    <div class="col-md-5 pull-right" ng-if="!processing">
-        <div class="form-group">
-            <label>Available items</label>
-            <select required class="form-control" ng-model="orderItem">
-                <option ng-repeat="item in items">{{item.Name}}</option>
-            </select>
+        <div class="form-group" id="ff_{{$index}}">
+            <label>Item</label>
+            <select id="sel_{{$index}}" ng-model="orderItems[$index]" required class="form-control" ng-options="item as (item.Name + ' ' + item.Size + ' ' + item.Milk + ' ' + item.Price) disable when item.isInUse for item in items track by item.Id"></select>
+            <label>Qty: </label>
+            <input min="1" id="qty_{{$index}}" class="form-control shortWidth" type="number" name="qty" required />
+            <i class="fa fa-check fa-3x checkMark" id="cm_{{$index}}" style="display:none"></i>
         </div>
-        <div class="btn-toolbar">
-            @*<button class="btn btn-danger pull-right" ng-show="orderItems.length > 0" ng-click="deleteOrderItem($index)">Delete</button>*@
-            <button class="btn btn-primary pull-right" ng-click="addOrderItem()">Add More</button>
-        </div>
-        
-    </div>
 </script>

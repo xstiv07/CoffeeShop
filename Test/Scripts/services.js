@@ -16,7 +16,7 @@ angular.module('app.services', [])
 
         itemFactory.update = function (id, item) {
             $http.defaults.headers.put["Content-Type"] = "application/xml";
-            return $http.put(baseUrl + "/" + id, item)
+            return $http.put(baseUrl + "/" + id, item);
         };
 
         itemFactory.delete = function (id) {
@@ -36,13 +36,43 @@ angular.module('app.services', [])
         var baseUrl = apiConfig.baseUrl + "/order";
 
         orderFactory.all = function () {
-            return $http.get(baseUrl);
+            return $http.get(baseUrl + "/getall");
         };
+
+        orderFactory.deleteItemFromOrder = function (itemId, orderUniqueId) {
+            return $http.delete(baseUrl + "/deleteOrderItem/" + itemId + "/" + orderUniqueId);
+        };
+
+        orderFactory.addItemToOrder = function (itemId, orderUniqueId, qty) {
+            return $http.post(baseUrl + "/addOrderItem/" + itemId + "/" + orderUniqueId + "/" + qty);
+        };
+
+        orderFactory.one = function (id) {
+            return $http.get(baseUrl + "/" + id);
+        };
+
+        orderFactory.update = function (id, order) {
+            $http.defaults.headers.put["Content-Type"] = "application/xml";
+            return $http.put(baseUrl + "/" + id, order)
+        }
 
         orderFactory.create = function (order) {
             $http.defaults.headers.post["Content-Type"] = "application/xml";
+
             return $http.post(baseUrl, order)
         };
+
+        orderFactory.getLines = function (id) {
+            return $http.get(baseUrl + "/getlineitems/" + id);
+        };
+
+        orderFactory.cancel = function (id) {
+            return $http.delete(baseUrl + "/" + id);
+        };
+
+        orderFactory.capturePayment = function (id) {
+            return $http.get(baseUrl + "/acceptpayment/" + id);
+        }
 
         return orderFactory;
     })

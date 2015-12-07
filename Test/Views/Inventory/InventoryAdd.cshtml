@@ -22,7 +22,7 @@
 
             <div class="form-group">
                 <label>Milk</label>
-                <select class="form-control" name="singleSelect" ng-model="item.Milk" ng-options="opt as opt for opt in milkValues"></select>
+                <select class="form-control" ng-model="item.Milk" ng-options="opt as opt for opt in milkValues"></select>
             </div>
 
             <div class="form-group">
@@ -32,12 +32,12 @@
 
             <div class="form-group">
                 <label>Quantity Available</label>
-                <input type="number" required class="form-control" ng-model="item.Quantity">
+                <input type="number" min="1" required class="form-control" ng-model="item.Quantity">
             </div>
 
             <div class="form-group">
                 <label>Price</label>
-                <input required type="number" class="form-control" ng-model="item.Price">
+                <input required min="1" type="number" class="form-control" ng-model="item.Price">
             </div>
 
             <div class="form-group">
@@ -45,15 +45,15 @@
                 <input type="file"
                        name="s3File"
                        onchange="angular.element(this).scope().setFile(this)"
-                       ng-model="fileName"
+                       ng-model="fileName" valid-file
                        required />
             </div>
 
-                <div class="form-group pull-right">
-                    <button type="submit" class="btn btn-primary">Create</button>
-                    <a ui-sref="inventory" class="btn btn-primary">Cancel</a>
-                </div>
-</form>
+            <div class="form-group pull-right">
+                <button type="submit" class="btn btn-primary">Create</button>
+                <a ui-sref="inventory" class="btn btn-primary">Cancel</a>
+            </div>
+        </form>
     </div>
 
     <div class="alert alert-danger bottom-0 align-center" ng-show="displayError">

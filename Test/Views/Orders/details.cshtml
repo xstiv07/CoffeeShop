@@ -1,0 +1,76 @@
+﻿<div class="container" ng-cloak>
+    <div class="padding-medium" ng-if="!processing">
+        <h4>Items in this order:</h4>
+        <hr />
+    </div>
+    <div class="row" ng-if="!processing">
+        <div class="col-sm-6 col-md-4" ng-repeat="item in orderItems">
+            <div class="panel panel-default panel-card">
+                <div class="panel-heading">
+                    <img ng-src="https://s3-us-west-2.amazonaws.com/cs-404-coffee/{{item.ImageURL}}" alt="coffee" />
+                </div>
+                <div class="panel-body">
+                    <div>
+                        <label>Sort: </label>
+                        <small>{{item.Name}}</small>
+                    </div>
+                    <div>
+                        <label>Description: </label>
+                        <small>{{item.Description}}</small>
+                    </div>
+                    <div>
+                        <label>Milk: </label>
+                        <small>{{item.Milk}}</small>
+                    </div>
+                    <div>
+                        <label>Size: </label>
+                        <small>{{item.Size}}</small>
+                    </div>
+                    <div>
+                        <label>Line Quantity: </label>
+                        <small>{{item.LineQty}}</small>
+                    </div>
+                    <div>
+                        <label class="red">Price: </label>
+                        <small>{{item.Price}}</small>
+                    </div>
+                </div>
+                <div class="panel-thumbnails">
+                    <div class="centered top-padding-sm">
+                        <a ng-click="deleteFromOrder(item.Id)" class="btn btn-danger btn-sm" role="button">Delete from order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <h3>Add new Item to Order:</h3>
+        <form name="itemsForm" ng-model="itemsForm" novalidate>
+            <div ng-repeat="templ in templates track by $index">
+                <div class="col-md-5" ng-if="!processing">
+                    <div ng-include src="templ.url"></div>
+
+                    <div class="btn-toolbar" ng-if="$index == templates.length - 1">
+                        <a ng-click="backToOrders()" class="btn btn-primary btn-sm pull-right" role="button">Back to Orders</a>
+                        <a ng-click="addItemToOrder(item.Id)" class="btn btn-primary btn-sm pull-right" role="button">Add New Item</a>
+                        <label ng-model="order.Total" class="pull-left">Total: {{total | number}}</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script type="text/ng-template" id="orderItems.html">
+    <div class="form-group" id="ff_{{$index}}">
+        <label>Item</label>
+        <select ng-model="newItem.item" required class="form-control" ng-options="item as (item.Name + ' ' + item.Size + ' ' + item.Milk + ' ' + item.Price) for item in items track by item.Id"></select>
+        <label>Qty: </label>
+        <input min="1" ng-model="newItemQty.qty" class="form-control shortWidth" type="number" name="qty" required />
+        <i class="fa fa-check fa-3x checkMark" id="cm_{{$index}}" style="display:none"></i>
+    </div>
+</script>

@@ -7,13 +7,16 @@
     <meta name="description" content="@PageData["description"]">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     @Styles.Render("~/content/css/app")
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
 </head>
 <body ng-cloak>
     <!--[if lt IE 9]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <header>
+    <header ng-controller="MainCtrl">
         <nav class="navbar navbar-findcond">
             <div class="container">
                 <div class="navbar-header">
@@ -36,7 +39,7 @@
                         <li class="cursor">
                             <a ui-sref="orders">
                                 Orders
-                                <span class="badge wistful-back">{{items.length}}</span>
+                                <span class="badge wistful-back">{{orders.length}}</span>
                             </a>
                         </li>
                     </ul>
@@ -53,7 +56,7 @@
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="~/Scripts/ng-file-upload-shim.min.js"></script>
     <script src="~/Scripts/ng-file-upload.min.js"></script>
     @Scripts.Render("~/js/app")

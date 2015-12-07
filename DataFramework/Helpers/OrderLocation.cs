@@ -9,10 +9,7 @@ namespace DataFramework.Helpers
 {
     public enum OrderLocation
     {
-        undefined,
-        [Display(Name="Order In")]
-        orderIn,
-        [Display(Name="Order Out")]
-        orderOut
+        In,
+        Out
     }
 }

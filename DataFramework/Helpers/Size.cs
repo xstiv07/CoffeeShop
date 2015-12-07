@@ -8,7 +8,7 @@ namespace DataFramework.Helpers
 {
     public enum Size
     {
-        undefined,
+        None,
         Small,
         Medium,
         Large

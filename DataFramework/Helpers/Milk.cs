@@ -9,8 +9,7 @@ namespace DataFramework.Helpers
 {
     public enum Milk
     {
-        [Display(Name="None")]
-        undefined,
+        None,
         Whole,
         [Display(Name="Low Fat")]
         Lowfat
