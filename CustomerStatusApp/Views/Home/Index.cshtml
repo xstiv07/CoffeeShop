@@ -1,0 +1,18 @@
+﻿@model List<DataFramework.Order>
+
+@*the script will set a timer to query orders from the API every 40 seconds. After the orders where received for the first time,
+the script spins off another timer (every 2 min) to mark completed orders as deleted.*@
+<script type="text/javascript" src="~/Scripts/_manageOrderUpdates.js"></script>
+
+@if (Model.Count > 0)
+{
+    <div class="row hover-row" id="content">
+        @Html.EditorForModel(Model)
+    </div>
+}
+else
+{
+    <div id="content">
+        <h3 class="margin">There are no pending orders.</h3>
+    </div>
+}

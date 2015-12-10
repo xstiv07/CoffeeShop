@@ -12,7 +12,12 @@ namespace RestBucksAPIWrapper
 
         public string GetOrders(String apiUrl)
         {
-            return BaseClass.CallApi(apiUrl + connectTo, "GET");
+            return BaseClass.CallApi(apiUrl + connectTo + "/getall", "GET");
+        }
+
+        public string GetPendingOrders(String apiUrl)
+        {
+            return BaseClass.CallApi(apiUrl + connectTo + "/getpending", "GET");
         }
 
         public string GetOrder(String apiUrl, int id)
@@ -38,6 +43,11 @@ namespace RestBucksAPIWrapper
         public string DeleteOrder(String apiUrl, int id)
         {
             return BaseClass.CallApi(apiUrl + connectTo + "?id=" + id, "DELETE");
+        }
+
+        public string MarkDeleted(String apiUrl, int id)
+        {
+            return BaseClass.CallApi(apiUrl + connectTo + "/markdeleted/" + id, "DELETE");
         }
     }
 }

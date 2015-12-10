@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataFramework", "DataFramew
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestBucksAPIWrapper", "RestBucksAPIWrapper\RestBucksAPIWrapper.csproj", "{4F87DD99-BADA-4F96-9286-61E74A7EEAC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{1020F60F-EF68-4F68-8B2D-8E9D4456FF05}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{EF63CD3F-0314-4979-80FB-AB9ECCB2772B}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
@@ -19,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{EF63CD
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POS", "Test\POS.csproj", "{D1166D06-27AE-4BE6-8AD9-C397E3367C5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerStatusApp", "CustomerStatusApp\CustomerStatusApp.csproj", "{D116D1C6-CAE9-4EC9-84E2-1914EBA60D0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,14 +38,14 @@ Global
 		{4F87DD99-BADA-4F96-9286-61E74A7EEAC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F87DD99-BADA-4F96-9286-61E74A7EEAC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F87DD99-BADA-4F96-9286-61E74A7EEAC7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1020F60F-EF68-4F68-8B2D-8E9D4456FF05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1020F60F-EF68-4F68-8B2D-8E9D4456FF05}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1020F60F-EF68-4F68-8B2D-8E9D4456FF05}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1020F60F-EF68-4F68-8B2D-8E9D4456FF05}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D1166D06-27AE-4BE6-8AD9-C397E3367C5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D1166D06-27AE-4BE6-8AD9-C397E3367C5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1166D06-27AE-4BE6-8AD9-C397E3367C5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1166D06-27AE-4BE6-8AD9-C397E3367C5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D116D1C6-CAE9-4EC9-84E2-1914EBA60D0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D116D1C6-CAE9-4EC9-84E2-1914EBA60D0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D116D1C6-CAE9-4EC9-84E2-1914EBA60D0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D116D1C6-CAE9-4EC9-84E2-1914EBA60D0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

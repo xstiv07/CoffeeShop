@@ -1,0 +1,24 @@
+﻿@model DataFramework.Order
+@using DataFramework.Helpers
+
+<div class="col-xs-3 orderBlock">
+    <div class="text-center orderNumber">
+        <span class="fa-stack fa-3x">
+            <i class="fa fa-circle-o fa-stack-2x"></i>
+            <strong class="fa-stack-1x">@Html.DisplayFor(model => model.Id)</strong>
+        </span>
+    </div>
+    <div class="text-center">
+        <h4>@Html.DisplayFor(model => model.CustomerFirstName) @Html.DisplayFor(model => model.CustomerLastName)</h4>
+        <p><b>@Html.DisplayFor(model => model.Status)</b></p>
+        <p>@Html.LabelFor(model => model.Location) : <b>@Html.DisplayFor(model => model.Location)</b></p>
+        <h4>@Html.LabelFor(model => model.Total): @Html.DisplayFor(model => model.Total)</h4>
+    </div>
+</div>
+
+@if (Model.Status == OrderStatus.Completed)
+{
+    <script type='text/javascript'>
+       completedOrders.push(@Model.Id)
+    </script>
+}

@@ -16,6 +16,7 @@ namespace DataFramework.Helpers
         Preparing,
         Ready,
         Completed,
-        Cancelled
+        Cancelled,
+        Deleted
     }
 }

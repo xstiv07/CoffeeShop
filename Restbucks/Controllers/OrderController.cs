@@ -18,7 +18,7 @@ namespace Restbucks.Controllers
         [Route("api/order/getpending")]
         public List<Order> GetPending()
         {
-            var pendingOrders = db.Orders.Where(x => x.Status != OrderStatus.Completed && x.Status != OrderStatus.Cancelled).ToList();
+            var pendingOrders = db.Orders.Where(x => x.Status != OrderStatus.Cancelled && x.Status != OrderStatus.Deleted).ToList();
             return pendingOrders;
         }
 
@@ -196,6 +196,28 @@ namespace Restbucks.Controllers
             if (order != null)
             {
                 order.Status = OrderStatus.Cancelled;
+                db.SaveChanges();
+
+                return order;
+            }
+            else
+            {
+                var notFoundResponse = new HttpResponseMessage(HttpStatusCode.NotFound);
+                throw new HttpResponseException(notFoundResponse);
+            }
+        }
+
+        [HttpDelete]
+        [Route("api/order/markdeleted/{id}")]
+        // DELETE api/order/5
+        public Order MarkDeleted(int id)
+        {
+            var order = db.Orders.Where(x => x.Id == id).FirstOrDefault();
+
+            if (order != null)
+            {
+                order.Status = OrderStatus.Deleted;
+                order.isDeleted = true;
                 db.SaveChanges();
 
                 return order;
